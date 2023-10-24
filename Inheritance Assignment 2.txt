@@ -1,0 +1,438 @@
+
+
+1) Create a multi-level inheritance , instantiate the child class and observe constructor invocation.Also show, if needed how will u invoke parent class constructor from child class ?
+
+class Base
+{
+	Base()
+	{
+		System.out.println("Inside base default");
+	}
+	
+//	Base(int num)
+//	{
+//		System.out.println("Inside base default");
+//	}
+}
+
+class Sub1 extends Base
+{
+	Sub1()
+	{
+		
+		System.out.println("Inside Sub1 default");
+	}
+	
+//	Sub1() //When Parent class has Parameterized constructor then  
+	       //we need to invoke parameterized constructor of Base class
+//	{
+//		super(10);
+//		System.out.println("Inside Sub1 default");
+//	}
+	
+//	Sub1(int k)
+//	{
+//		System.out.println("Inside Sub1 default");
+//	}
+}
+
+class Sub2 extends Sub1
+{
+	Sub2()
+	{
+		System.out.println("Inside Sub2 Default");
+	}
+	
+//	Sub2()
+//	{
+//		super(10);
+//		System.out.println("Inside Sub2 Default");
+//	}
+	
+	Sub2(int k)
+	{
+		System.out.println("inside param of Sub2 ");
+	}
+
+	
+}
+
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		Sub2 s2= new Sub2(10);
+		
+	}
+}
+
+
+2) create a class "Vehicle", define a method "public void start()" in it. From this class derive a class FourWheeler. How will u override "start()" method of parent class ?
+
+
+
+class Vehicle 
+{
+	public void start() //Overridden method
+	{
+		System.out.println("Inside vehicle");
+	}
+}
+
+class Fourwheeler extends Vehicle
+{
+	//Overriding method
+	 public void start() //Protected //default will not work here 
+	{
+		System.out.println("Inside Fourwheeler");
+	}
+}
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		Fourwheeler fw= new Fourwheeler();
+		fw.start();
+		
+	}
+}
+
+
+3) Go for Hierarchical inheritance, create instances of child class and observe constructor invocation.
+
+class Base //Base Class
+{
+	Base()
+	{
+		System.out.println("Inside Base default");
+	}
+}
+
+class Sub1 extends Base //Child class inherited from Base
+{
+	Sub1()
+	{
+		System.out.println("Inside Sub1 default \n");
+	}
+	
+}
+
+class Sub2 extends Base //Child class inherited from Base
+{
+	Sub2()
+	{
+		System.out.println("Inside Sub2 default \n");
+	}
+}
+
+class Sub3 extends Base  //Child class inherited from Base
+{
+	Sub3()
+	{
+		System.out.println("Inside Sub3 default \n");
+	}
+}
+
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		Sub3 s3= new Sub3();
+		Sub2 s2= new Sub2();
+		Sub1 sub1 = new Sub1();
+		
+	}
+}
+
+
+4) Create a class "Top1" with "disp1()" method.
+From this class Derive "Bottom1", "Bottom2" and "Bottom3" classes ,override the "disp1()".
+Now show how will u achieve dynamic polymorphism.
+
+class Top1
+{
+	void disp()
+	{
+		System.out.println("Inside Top1");
+	}
+}
+
+class Bottom1 extends Top1
+{
+	void disp()
+	{
+		System.out.println("Inside Bottom1\n");
+	}
+}
+
+class Bottom2 extends Top1
+{
+	void disp()
+	{
+		System.out.println("Inside Bottom2\n");
+	}
+}
+
+class Bottom3 extends Top1
+{
+	void disp()
+	{
+		System.out.println("Inside Bottom3\n");
+	}
+}
+
+
+class Myclass
+{
+	public static void main(String args[])
+	{
+		Bottom3 b3= new Bottom3();
+		b3.disp();
+		
+		Bottom2 b2= new Bottom2();
+		b2.disp();
+		
+		Bottom1 b1= new Bottom1();
+		b1.disp();
+		
+	}
+}
+
+
+5) create abstract class Shape. declare "draw()" function as abstract. From this class define "Triangle","Polygon" and "Circle" .
+create an array of Shape having 3 elements.
+store child objects into this array . and call
+their draw function.
+
+abstract class Shape
+{
+	abstract void draw();
+
+}
+
+class Triangle extends Shape
+{
+	void draw()
+	{
+		System.out.println("Draw Triangle\n");
+	}	
+}
+
+class Polygon extends Shape
+{
+	void draw()
+	{
+		System.out.println("Draw Polygon\n");
+	}	
+}
+
+class Circle extends Shape
+{
+	void draw()
+	{
+		System.out.println("Draw Circle\n");
+	}	
+}
+
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		Shape arr []= new Shape[3];
+		arr[0]= new Triangle();
+		arr[1]= new Polygon();
+		arr[2]= new Circle();
+		for(int i=0;i<arr.length;i++)
+		{
+			arr[i].draw();
+		}
+		
+	}
+}
+
+
+6) Define interface "A" with "disp1()" method.
+Derive from "A", interface "B" with "disp2" method.
+Derive class "C" , from "B".
+Instantiate class "C" and call its members as well as derived from parent interfaces.
+
+abstract interface A
+{
+	abstract void disp1();
+}
+
+interface B extends A
+{
+	abstract void disp2();
+	
+}
+
+class C implements B
+{
+	public void disp1()
+	{
+		System.out.println("Inside disp1 in C\n");
+	}
+	public void disp2()
+	{
+		System.out.println("Inside disp2 in C\n");
+	}
+	
+}
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		C c1 = new C();
+		c1.disp1();
+		c1.disp2();
+	}
+}
+
+
+7) Define class "Parent1" with some data.
+Define interface "Parent2" with some methods.
+Derive a class "Child" from "Parent1" and "Parent2", instantiate it and call the members.
+
+
+
+class Parent1
+{
+	void disp()
+	{
+		System.out.println("Inside Parent disp");
+	}
+}
+
+interface Parent2
+{
+	abstract void disp2();
+}
+
+class Child extends Parent1 implements Parent2
+{
+	public void disp2()
+	{
+		System.out.println("Inside Child Disp2");
+	}
+}
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		Child c1= new Child();
+		c1.disp();
+		c1.disp2();
+	}
+}
+
+
+8) Define a class "base1" with only parameterized constructor.
+Derive a class "sub1" from "base1". This class should have following constructors
+	a) Default
+	b) one parameter
+	c) two parameter
+Now try to instantiate "sub1" , using any of the above mentioned constructors.
+
+
+class Base1
+{
+	int num;
+	Base1(int num)
+	{
+		this.num=num;
+		System.out.println("Inside Base Constructor of Base1 "+num);	
+	}
+}
+class Sub1 extends Base1
+{
+	int num2;
+	int num3;
+	Sub1()
+	{
+		super(10);
+		System.out.println("Inside default const of Sub1\n");
+	}
+	Sub1(int num2)
+	{
+		super(20);
+		this.num2=num2;
+		System.out.println("Inside Param Const of Sub1\n");
+		
+	}
+	Sub1(int num2,int num3)
+	{
+		super(30);
+		this.num2=num2;
+		this.num3=num3;
+		System.out.println("Inside 2 param const of Sub1\n");
+	}
+}
+
+
+public class Myclass
+{
+	public static void main(String args[])
+	{
+		Sub1 s1= new Sub1();
+		Sub1 s2 = new Sub1(55);
+		Sub1 s3= new Sub1(65,75);
+		
+		
+	}
+}
+
+
+9) create interface "Game" , have an abstract method "play()". from this interface implements classes like "Cricket" , "FootBall" and "Tennis".
+Now Define one more class 
+public class Demo with main function.
+In this class have a static method "perform" which will take interface reference as parameter.inside "perform()" see to it that any child object passed ,its "play()" method should be invoked. Call "perform()" method from main function.
+
+interface Game
+{
+	abstract void play();
+}
+
+class Cricket implements Game
+{
+	public void play()
+	{
+		System.out.println("Play Game Cricket");
+	}
+}
+
+class Football implements Game
+{
+	public void play()
+	{
+		System.out.println("Play Game Football");
+	}
+}
+
+class Tennis implements Game
+{
+	public void play()
+	{
+		System.out.println("Play Game Tennis");
+	}
+}
+
+public class Demo
+{
+	static void perform (Game ref)
+	{
+		ref.play();
+	}
+	public static void main(String args[])
+	{
+		perform(new Cricket());
+		perform(new Tennis());
+		perform(new Football());
+	}
+}
